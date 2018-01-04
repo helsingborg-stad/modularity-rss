@@ -28,7 +28,40 @@ class App extends \Modularity\Module
 
     public function data() : array
     {
-        $data = get_field('mod_rss', $this->ID);
+        include_once(ABSPATH . WPINC . '/feed.php');
+
+        $feeds = get_field('mod_rss', $this->ID);
+
+        $data['result'] = array();
+
+        if (is_array($feeds) && !empty($feeds)) {
+            foreach ($feeds as $feed) {
+
+                //Fetch the feed
+                $rss = fetch_feed($feed['mod_rss_url']);
+
+                //Error? Jump to next
+                if (is_wp_error($rss)) {
+                    continue;
+                }
+
+                //Get items
+                $rss_items = $rss->get_items(0, $rss->get_item_quantity(5));
+
+                //Append to result
+                if (!empty($rss_items)) {
+                    foreach ($rss_items as $item) {
+                        $data['result'][] = array(
+                            'title' => $item->get_title(),
+                            'content' => '',
+                            'author' => '',
+                            'link' => $item->get_permalink(),
+                            'date' => $item->get_date('j F Y | g:i a')
+                        );
+                    }
+                }
+            }
+        }
 
         $data['classes'] = implode(' ', apply_filters('Modularity/Module/Classes', array(), $this->post_type, $this->args));
 
