@@ -28,7 +28,7 @@ class App extends \Modularity\Module
 
     public function data() : array
     {
-        //$data = get_field('mod_rss_data', $this->ID);
+        $data = get_field('mod_rss', $this->ID);
 
         $data['classes'] = implode(' ', apply_filters('Modularity/Module/Classes', array(), $this->post_type, $this->args));
 

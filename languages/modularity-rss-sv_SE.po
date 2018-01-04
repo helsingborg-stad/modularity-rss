@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Modularity RSS reader\n"
-"POT-Creation-Date: 2018-01-04 15:23+0100\n"
-"PO-Revision-Date: 2018-01-04 15:24+0100\n"
+"POT-Creation-Date: 2018-01-04 15:45+0100\n"
+"PO-Revision-Date: 2018-01-04 15:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -33,6 +33,30 @@ msgid ""
 "Outputs a rss feed from desired links. The feed can combine multiple sources "
 "in a single feed."
 msgstr "Skriver ut ett rss flöde från en eller flera rss-länkar. "
+
+#: source/php/acf-fields/php/mod-rss.php:6
+msgid "Rss Feeds"
+msgstr "Rss flöden"
+
+#: source/php/acf-fields/php/mod-rss.php:10
+msgid "Add rss feeds"
+msgstr "Lägg till rss flöden"
+
+#: source/php/acf-fields/php/mod-rss.php:13
+msgid "Add one or more rss-feeds to display them"
+msgstr "Lägg till en eller flera rss flöden för att visa dem."
+
+#: source/php/acf-fields/php/mod-rss.php:25
+msgid "Add feed"
+msgstr "Lägg till ny"
+
+#: source/php/acf-fields/php/mod-rss.php:29
+msgid "Rss Url"
+msgstr "Rss webbadress"
+
+#: source/php/acf-fields/php/mod-rss.php:32
+msgid "Enter a valid rss-feed"
+msgstr "Ange ett giltigt flöde"
 
 #. Plugin Name of the plugin/theme
 msgid "Modularity RSS reader"
