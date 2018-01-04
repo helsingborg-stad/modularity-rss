@@ -41,7 +41,7 @@ add_action('plugins_loaded', function () {
     $acfExportManager->setTextdomain('modularity-testimonials');
     $acfExportManager->setExportFolder(MODULARITYRSS_PATH . 'source/php/acf-fields/');
     $acfExportManager->autoExport(array(
-        'mod-rss' => 'group_56dedc26e538fefsfse8',
+        'mod-rss' => 'group_5a4e3c8ce5cf2',
     ));
     $acfExportManager->import();
 });

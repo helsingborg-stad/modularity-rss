@@ -1,0 +1,61 @@
+[{
+    "key": "group_5a4e3c8ce5cf2",
+    "title": "Rss Feeds",
+    "fields": [
+        {
+            "key": "field_5a4e3c9a10aa7",
+            "label": "Add rss feeds",
+            "name": "mod_rss",
+            "type": "repeater",
+            "instructions": "Add one or more rss-feeds to display them",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 1,
+            "max": 10,
+            "layout": "table",
+            "button_label": "Add feed",
+            "sub_fields": [
+                {
+                    "key": "field_5a4e3ca510aa8",
+                    "label": "Rss Url",
+                    "name": "mod_rss_url",
+                    "type": "url",
+                    "instructions": "Enter a valid rss-feed",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": ""
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "mod-rssfeed"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": ""
+}]
+
