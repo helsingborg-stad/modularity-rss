@@ -42,6 +42,27 @@
                 ),
             ),
         ),
+        1 => array(
+            'key' => 'field_5a4f3861781a9',
+            'label' => __('Limit to max number of inlays', 'modularity-testimonials'),
+            'name' => 'mod_rss_limit',
+            'type' => 'number',
+            'instructions' => '',
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'default_value' => 7,
+            'placeholder' => __('Enter a number for max limit', 'modularity-testimonials'),
+            'prepend' => '',
+            'append' => __('number of inlays', 'modularity-testimonials'),
+            'min' => 1,
+            'max' => 20,
+            'step' => 1,
+        ),
     ),
     'location' => array(
         0 => array(

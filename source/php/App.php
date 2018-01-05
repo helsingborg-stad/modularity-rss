@@ -32,7 +32,7 @@ class App extends \Modularity\Module
 
         $feeds = get_field('mod_rss', $this->ID);
 
-        $data['result'] = array();
+        $data['feed'] = array();
 
         if (is_array($feeds) && !empty($feeds)) {
             foreach ($feeds as $feed) {
@@ -46,23 +46,41 @@ class App extends \Modularity\Module
                 }
 
                 //Get items
-                $rss_items = $rss->get_items(0, $rss->get_item_quantity(5));
+                $rss_items = $rss->get_items(0, $rss->get_item_quantity(20));
 
                 //Append to result
                 if (!empty($rss_items)) {
                     foreach ($rss_items as $item) {
-                        $data['result'][] = array(
+                        $data['feed'][] = array(
+                            'id' => $item->get_id(),
                             'title' => $item->get_title(),
-                            'content' => '',
-                            'author' => '',
+                            'excerpt' => strip_tags($item->get_description()),
+                            'content' => strip_tags($item->get_content()),
+                            'author' => $item->get_author(),
                             'link' => $item->get_permalink(),
-                            'date' => $item->get_date('j F Y | g:i a')
+                            'time' => strtotime($item->get_date('Y-m-d H:i:s')),
+                            'time_markup' => $item->get_date('Y-m-d H:i:s'),
+                            'time_readable' => $this->readableTimeStamp(strtotime($item->get_date('Y-m-d H:i:s')))
                         );
                     }
                 }
             }
         }
 
+        //Sort
+        $data['feed'] = $this->sortByTimestamp($data['feed']);
+
+        //Truncate
+        $data['feed'] = $this->truncateFeed($data['feed']);
+
+        //Translation strings
+        $data['translations'] = array(
+            'readmore' => __("Read more", 'modularity-rss'),
+            'noposts' => __("No posts avabile from the selected sources.", 'modularity-rss'),
+            'ago' => __("ago", 'modularity-rss'),
+        );
+
+        //Mod classes
         $data['classes'] = implode(' ', apply_filters('Modularity/Module/Classes', array(), $this->post_type, $this->args));
 
         return $data;
@@ -98,7 +116,7 @@ class App extends \Modularity\Module
 
     public function truncateFeed($feed)
     {
-        $limit = is_numeric(get_field('mod_social_items', $this->ID)) ? get_field('mod_social_items', $this->ID) : 10;
+        $limit = is_numeric(get_field('mod_rss_limit', $this->ID)) ? get_field('mod_rss_limi', $this->ID) : 7;
         return array_slice($feed, 0, $limit);
     }
 
@@ -111,7 +129,7 @@ class App extends \Modularity\Module
     public function sortByTimestamp($feed)
     {
         usort($feed, function ($a, $b) {
-            return (int) $b['timestamp'] - (int) $a['timestamp'];
+            return (int) $b['time'] - (int) $a['time'];
         });
 
         return $feed;

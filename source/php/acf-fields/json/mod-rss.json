@@ -38,6 +38,27 @@
                     "placeholder": ""
                 }
             ]
+        },
+        {
+            "key": "field_5a4f3861781a9",
+            "label": "Limit to max number of inlays",
+            "name": "mod_rss_limit",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 7,
+            "placeholder": "Enter a number for max limit",
+            "prepend": "",
+            "append": "number of inlays",
+            "min": 1,
+            "max": 20,
+            "step": 1
         }
     ],
     "location": [

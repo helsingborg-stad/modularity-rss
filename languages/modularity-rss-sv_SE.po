@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Modularity RSS reader\n"
-"POT-Creation-Date: 2018-01-04 15:45+0100\n"
-"PO-Revision-Date: 2018-01-04 15:46+0100\n"
+"POT-Creation-Date: 2018-01-05 09:40+0100\n"
+"PO-Revision-Date: 2018-01-05 09:41+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -34,6 +34,18 @@ msgid ""
 "in a single feed."
 msgstr "Skriver ut ett rss flöde från en eller flera rss-länkar. "
 
+#: source/php/App.php:78
+msgid "Read more"
+msgstr "Läs mer"
+
+#: source/php/App.php:79
+msgid "No posts avabile from the selected sources."
+msgstr "Inga inlägg kunde hämtas från de aktuella källorna."
+
+#: source/php/App.php:80
+msgid "ago"
+msgstr "sedan"
+
 #: source/php/acf-fields/php/mod-rss.php:6
 msgid "Rss Feeds"
 msgstr "Rss flöden"
@@ -57,6 +69,18 @@ msgstr "Rss webbadress"
 #: source/php/acf-fields/php/mod-rss.php:32
 msgid "Enter a valid rss-feed"
 msgstr "Ange ett giltigt flöde"
+
+#: source/php/acf-fields/php/mod-rss.php:47
+msgid "Limit to max number of inlays"
+msgstr "Brägränsa maximala antalet inlägg som visas"
+
+#: source/php/acf-fields/php/mod-rss.php:59
+msgid "Enter a number for max limit"
+msgstr "Ange maximalt antal inlägg som en siffra"
+
+#: source/php/acf-fields/php/mod-rss.php:61
+msgid "number of inlays"
+msgstr "Antal inlägg"
 
 #. Plugin Name of the plugin/theme
 msgid "Modularity RSS reader"
