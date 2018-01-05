@@ -43,6 +43,7 @@ class App extends \Modularity\Module
 
                 //Error? Jump to next
                 if (is_wp_error($rss)) {
+                    error_log("Modularity RSS Feed:" . $result->get_error_message());
                     continue;
                 }
 
@@ -71,7 +72,6 @@ class App extends \Modularity\Module
 
                         //Append full item
                         $data['feed'][] = $current;
-
                     }
                 }
             }
