@@ -57,7 +57,7 @@ class App extends \Modularity\Module
                         //Inlay item
                         $current = array(
                             'encloushure' => array(),
-                            'id' => $item->get_id(),
+                            'id' => base_convert(md5($item->get_id()), 10, 36),
                             'title' => $item->get_title(),
                             'excerpt' => strip_tags($item->get_description()),
                             'content' => strip_tags($item->get_content()),

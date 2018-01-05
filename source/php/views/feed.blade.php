@@ -10,7 +10,13 @@
                     <a href="{{ $item['link'] }}" class="box box-news box-news-horizontal">
 
                         <div class="box-content">
-                            <h3 class="box-title text-highlight">{{ $item['title'] }}</h3>
+                            <h3 class="box-title text-highlight">
+                                {{ $item['title'] }}
+
+                                @if(is_user_logged_in())
+                                    <button href="#"><i class="pricon pricon-eye"></i></button>
+                                @endif
+                            </h3>
 
                             @if(in_array('date', $display))
                             <time datetime="{{ $item['time_markup'] }}">{{ $item['time_markup'] }} ({{ $item['time_readable'] }} {{ $translations['ago'] }})</time>
