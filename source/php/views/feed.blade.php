@@ -9,17 +9,34 @@
                 <li>
                     <a href="{{ $item['link'] }}" class="box box-news box-news-horizontal">
 
-                        @if($image)
-                        <div class="box-image-container">
-                            <img src="{{ $image }}">
-                        </div>
-                        @endif
-
                         <div class="box-content">
                             <h3 class="box-title text-highlight">{{ $item['title'] }}</h3>
-                            <time datetime="{{ $item['time_markup'] }}">{{ $item['time_readable'] }} {{ $translations['ago'] }}</time>
-                            <p>{{ $item['excerpt'] }}</p>
+
+                            @if(in_array('date', $display))
+                            <time datetime="{{ $item['time_markup'] }}">{{ $item['time_markup'] }} ({{ $item['time_readable'] }} {{ $translations['ago'] }})</time>
+                            @endif
+
+                            @if(in_array('label', $display))
+                            <span class="source strong">
+                                @if(in_array('date', $display))
+                                    -
+                                @endif
+                                {{ $item['encloushure']['title'] }}
+                            </span>
+                            @endif
+
+                            @if(in_array('excerpt', $display))
+                                <p>{{ $item['excerpt'] }}</p>
+                            @endif
+
+                            @if(in_array('content', $display))
+                                <p>{{ $item['content'] }}</p>
+                            @endif
+
+                            @if(in_array('readmore', $display))
                             <p><span class="link-item">{{ $translations['readmore'] }}</span></p>
+                            @endif
+
                         </div>
                     </a>
                 </li>

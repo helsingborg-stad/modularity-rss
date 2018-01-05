@@ -33,6 +33,7 @@ class App extends \Modularity\Module
         $feeds = get_field('mod_rss', $this->ID);
 
         $data['feed'] = array();
+        $data['display'] = get_field('mod_rss_display', $this->ID);
 
         if (is_array($feeds) && !empty($feeds)) {
             foreach ($feeds as $feed) {
@@ -51,18 +52,26 @@ class App extends \Modularity\Module
                 //Append to result
                 if (!empty($rss_items)) {
                     foreach ($rss_items as $item) {
-                        $data['feed'][] = array(
+
+                        //Inlay item
+                        $current = array(
+                            'encloushure' => array(),
                             'id' => $item->get_id(),
                             'title' => $item->get_title(),
                             'excerpt' => strip_tags($item->get_description()),
                             'content' => strip_tags($item->get_content()),
                             'author' => $item->get_author(),
                             'link' => $item->get_permalink(),
-                            'image' => $item->get_image_url(),
                             'time' => strtotime($item->get_date('Y-m-d H:i:s')),
-                            'time_markup' => $item->get_date('Y-m-d H:i:s'),
+                            'time_markup' => $item->get_date('Y-m-d H:i'),
                             'time_readable' => $this->readableTimeStamp(strtotime($item->get_date('Y-m-d H:i:s')))
                         );
+
+                        $current['encloushure']['title'] = $feed['mod_rss_label'] ? $feed['mod_rss_label'] : $rss->get_title();
+
+                        //Append full item
+                        $data['feed'][] = $current;
+
                     }
                 }
             }

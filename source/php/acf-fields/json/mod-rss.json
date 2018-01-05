@@ -3,6 +3,22 @@
     "title": "Rss Feeds",
     "fields": [
         {
+            "key": "field_5a4f4f70314d0",
+            "label": "General",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_5a4e3c9a10aa7",
             "label": "Add rss feeds",
             "name": "mod_rss",
@@ -22,6 +38,25 @@
             "button_label": "Add feed",
             "sub_fields": [
                 {
+                    "key": "field_5a4f4f0fcf9cc",
+                    "label": "Rss label",
+                    "name": "mod_rss_label",
+                    "type": "text",
+                    "instructions": "Name this feed, if its empty the feed name will be used (if active in display settings).",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
                     "key": "field_5a4e3ca510aa8",
                     "label": "Rss Url",
                     "name": "mod_rss_url",
@@ -30,7 +65,7 @@
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "50",
                         "class": "",
                         "id": ""
                     },
@@ -38,6 +73,22 @@
                     "placeholder": ""
                 }
             ]
+        },
+        {
+            "key": "field_5a4f4f84314d1",
+            "label": "Display settings",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
         },
         {
             "key": "field_5a4f3861781a9",
@@ -59,6 +110,37 @@
             "min": 1,
             "max": 20,
             "step": 1
+        },
+        {
+            "key": "field_5a4f4f8e314d2",
+            "label": "Display parts",
+            "name": "mod_rss_display",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "label": "Show label",
+                "excerpt": "Show excerpt",
+                "date": "Show date",
+                "readmore": "Show read more",
+                "content": "Show full content"
+            },
+            "allow_custom": 0,
+            "save_custom": 0,
+            "default_value": [
+                "label",
+                "excerpt",
+                "date"
+            ],
+            "layout": "horizontal",
+            "toggle": 0,
+            "return_format": "value"
         }
     ],
     "location": [
