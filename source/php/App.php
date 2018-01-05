@@ -116,7 +116,7 @@ class App extends \Modularity\Module
 
     public function truncateFeed($feed)
     {
-        $limit = is_numeric(get_field('mod_rss_limit', $this->ID)) ? get_field('mod_rss_limi', $this->ID) : 7;
+        $limit = is_numeric(get_field('mod_rss_limit', $this->ID)) ? get_field('mod_rss_limit', $this->ID) : 7;
         return array_slice($feed, 0, $limit);
     }
 
