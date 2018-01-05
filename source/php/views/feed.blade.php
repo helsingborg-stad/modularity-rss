@@ -8,6 +8,13 @@
             @foreach($feed as $item)
                 <li>
                     <a href="{{ $item['link'] }}" class="box box-news box-news-horizontal">
+
+                        @if($image)
+                        <div class="box-image-container">
+                            <img src="{{ $image }}">
+                        </div>
+                        @endif
+
                         <div class="box-content">
                             <h3 class="box-title text-highlight">{{ $item['title'] }}</h3>
                             <time datetime="{{ $item['time_markup'] }}">{{ $item['time_readable'] }} {{ $translations['ago'] }}</time>

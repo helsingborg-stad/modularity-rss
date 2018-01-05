@@ -58,6 +58,7 @@ class App extends \Modularity\Module
                             'content' => strip_tags($item->get_content()),
                             'author' => $item->get_author(),
                             'link' => $item->get_permalink(),
+                            'image' => $item->get_image_url(),
                             'time' => strtotime($item->get_date('Y-m-d H:i:s')),
                             'time_markup' => $item->get_date('Y-m-d H:i:s'),
                             'time_readable' => $this->readableTimeStamp(strtotime($item->get_date('Y-m-d H:i:s')))
