@@ -6,6 +6,11 @@
 
         <!-- Functional css -->
         <style scoped>
+
+            .pricon-eye-hide {
+                display: none;
+            }
+
             .is-hidden .pricon-eye {
                 display: none;
             }
