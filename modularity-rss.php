@@ -30,9 +30,9 @@ require_once MODULARITYRSS_PATH . 'source/php/Vendor/Psr4ClassLoader.php';
 require_once MODULARITYRSS_PATH . 'Public.php';
 
 // Instantiate and register the autoloader
-$loader = new MODULARITYRSS\Vendor\Psr4ClassLoader();
-$loader->addPrefix('MODULARITYRSS', MODULARITYRSS_PATH);
-$loader->addPrefix('MODULARITYRSS', MODULARITYRSS_PATH . 'source/php/');
+$loader = new ModularityRss\Vendor\Psr4ClassLoader();
+$loader->addPrefix('ModularityRss', MODULARITYRSS_PATH);
+$loader->addPrefix('ModularityRss', MODULARITYRSS_PATH . 'source/php/');
 $loader->register();
 
 // Acf auto import and export
@@ -56,4 +56,9 @@ add_action('plugins_loaded', function () {
             'App'
         );
     }
+});
+
+add_action('init', function () {
+    new ModularityRss\Ajax();
+    new ModularityRss\Enqueue();
 });

@@ -4,6 +4,18 @@
             <h4 class="box-title">{!! apply_filters('the_title', $post_title) !!}</h4>
         @endif
 
+        <!-- Functional css -->
+        <style scoped>
+            .is-hidden .pricon-eye {
+                display: none;
+            }
+
+            .is-hidden .pricon-eye-hide {
+                display: inline-block;
+            }
+        </style>
+
+        <!-- List -->
         <ul id="{{ $sectionID }}" class="rss-feed rss-feed-v2">
             @foreach($feed as $item)
                 <li>
@@ -13,8 +25,8 @@
                             <h3 class="box-title text-highlight">
                                 {{ $item['title'] }}
 
-                                @if(is_user_logged_in())
-                                    <button href="#"><i class="pricon pricon-eye"></i></button>
+                                @if($showVisibilityButton)
+                                    <button class="js-mod-rss-toggle-visibility {{ $item['visibilityClass'] }}" data-module-id="{{ $moduleId }}" data-inlay-id="{{ $item['id'] }}"><i class="pricon pricon-eye"></i><i class="pricon pricon-eye-hide"></i></button>
                                 @endif
                             </h3>
 

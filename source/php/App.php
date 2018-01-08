@@ -9,6 +9,8 @@ class App extends \Modularity\Module
 
     public $feedArgs;
 
+    public $hiddenInlays = array();
+
     public $curl;
 
     public function init()
@@ -32,8 +34,10 @@ class App extends \Modularity\Module
 
         $feeds = get_field('mod_rss', $this->ID);
 
+        $data['moduleId'] = $this->ID;
         $data['feed'] = array();
         $data['display'] = get_field('mod_rss_display', $this->ID);
+        $data['hidden'] = get_post_meta($this->ID, 'mod_rss_hidden_inlays', true);
 
         if (is_array($feeds) && !empty($feeds)) {
             foreach ($feeds as $feed) {
@@ -68,10 +72,24 @@ class App extends \Modularity\Module
                             'time_readable' => $this->readableTimeStamp(strtotime($item->get_date('Y-m-d H:i:s')))
                         );
 
+                        //Append label
                         $current['encloushure']['title'] = $feed['mod_rss_label'] ? $feed['mod_rss_label'] : $rss->get_title();
 
-                        //Append full item
-                        $data['feed'][] = $current;
+                        //Append class
+                        if (in_array($current['id'], $data['hidden'])) {
+                            $current['visibilityClass'] = "is-hidden";
+                        } else {
+                            $current['visibilityClass'] = "";
+                        }
+
+                        //Append full item, if not hidden and !logged in
+                        if (is_user_logged_in() && current_user_can('edit_posts')) {
+                            $data['feed'][] = $current;
+                        } else {
+                            if (!in_array($current['id'], $data['hidden'])) {
+                                $data['feed'][] = $current;
+                            }
+                        }
                     }
                 }
             }
@@ -92,6 +110,13 @@ class App extends \Modularity\Module
 
         //Mod classes
         $data['classes'] = implode(' ', apply_filters('Modularity/Module/Classes', array(), $this->post_type, $this->args));
+
+        //Can edit?
+        if (is_user_logged_in() && current_user_can('edit_posts')) {
+            $data['showVisibilityButton'] = true;
+        } else {
+            $data['showVisibilityButton'] = false;
+        }
 
         return $data;
     }
@@ -162,6 +187,29 @@ class App extends \Modularity\Module
                 }
             }
 
+            return $sanitized;
+        }
+
+        return $feed;
+    }
+
+    /**
+     * Remove hidden inlays
+     * @param array $feed array items with the feed data
+     * @return array $feed sanitized output array
+     */
+
+    public function removeHidden($feed)
+    {
+        $sanitized= array();
+
+        if (is_array($feed) && !empty($feed)) {
+            foreach ($feed as $item) {
+                if (in_array($item['id'], $this->hiddenInlays)) {
+                    continue;
+                }
+                $sanitized[$item['id']] = $item;
+            }
             return $sanitized;
         }
 
