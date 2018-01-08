@@ -1,6 +1,5 @@
 var ModularityRss = {};
 
-
 ModularityRss = ModularityRss || {};
 
 ModularityRss.ToggleVisiblility = (function ($) {
