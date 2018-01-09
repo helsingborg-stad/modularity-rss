@@ -47,7 +47,7 @@ class App extends \Modularity\Module
 
                 //Error? Jump to next
                 if (is_wp_error($rss)) {
-                    $this->registerError("Modularity RSS Feed:" . $rss->get_error_message());
+                    $this->registerError("Modularity RSS Feed (on ". $feed['mod_rss_url'] ."):" . $rss->get_error_message());
                     continue;
                 }
 
