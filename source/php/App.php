@@ -46,8 +46,8 @@ class App extends \Modularity\Module
                 $rss = fetch_feed($feed['mod_rss_url']);
 
                 //Error? Jump to next
-                if (is_wp_error($rss)) {
-                    $this->registerError("Modularity RSS Feed:" . $result->get_error_message());
+                if (is_wp_error($rss) && isset($rss->get_error_message())) {
+                    $this->registerError("Modularity RSS Feed:" . $rss->get_error_message());
                     continue;
                 }
 
