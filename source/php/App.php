@@ -194,29 +194,6 @@ class App extends \Modularity\Module
     }
 
     /**
-     * Remove hidden inlays
-     * @param array $feed array items with the feed data
-     * @return array $feed sanitized output array
-     */
-
-    public function removeHidden($feed)
-    {
-        $sanitized= array();
-
-        if (is_array($feed) && !empty($feed)) {
-            foreach ($feed as $item) {
-                if (in_array($item['id'], $this->hiddenInlays)) {
-                    continue;
-                }
-                $sanitized[$item['id']] = $item;
-            }
-            return $sanitized;
-        }
-
-        return $feed;
-    }
-
-    /**
      * Tell what view to render as module.
      * @return string The view that should be rendered
      */
