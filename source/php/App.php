@@ -72,6 +72,8 @@ class App extends \Modularity\Module
                         //Append label
                         $current['encloushure']['title'] = $feed['mod_rss_label'] ? $feed['mod_rss_label'] : $rss->get_title();
 
+                        //Append to result
+                        $data['feed'][] = $current;
                     }
                 }
             }
@@ -211,16 +213,21 @@ class App extends \Modularity\Module
 
     public function appendVisibility($feed, $hidden, $key = 'id')
     {
+
+        if (!is_array($hidden)) {
+            $hidden = array();
+        }
+
         if (is_array($feed) && !empty($feed)) {
-            foreach ($feed as $item) {
+            foreach ($feed as &$item) {
                 if (in_array($item[$key], $hidden)) {
-                    $current['visibilityClass'] = "is-hidden";
+                    $item['visibilityClass'] = "is-hidden";
                 } else {
-                    $current['visibilityClass'] = "";
+                    $item['visibilityClass'] = "";
                 }
             }
-
         }
+
         return $feed;
     }
     /**
@@ -239,6 +246,11 @@ class App extends \Modularity\Module
             return $feed;
         }
 
+        //Reset
+        if (!is_array($hidden)) {
+            $hidden = array();
+        }
+
         $sanitized= array();
 
         if (is_array($feed) && !empty($feed)) {
@@ -251,29 +263,6 @@ class App extends \Modularity\Module
             return $sanitized;
         }
 
-        return $feed;
-    }
-
-    /**
-     * Append visibility class
-     * @param array $feed array items with the feed data
-     * @param array $hidden array with hidden id's
-     * @param string $key name of compare item
-     * @return array $feed sanitized output array
-     */
-
-    public function appendVisibility($feed, $hidden, $key = 'id')
-    {
-        if (is_array($feed) && !empty($feed)) {
-            foreach ($feed as $item) {
-                if (in_array($item[$key], $hidden)) {
-                    $current['visibilityClass'] = "is-hidden";
-                } else {
-                    $current['visibilityClass'] = "";
-                }
-            }
-
-        }
         return $feed;
     }
 
