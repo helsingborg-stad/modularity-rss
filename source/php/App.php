@@ -9,8 +9,6 @@ class App extends \Modularity\Module
 
     public $feedArgs;
 
-    public $hiddenInlays = array();
-
     public $curl;
 
     public function init()
