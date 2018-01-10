@@ -35,7 +35,6 @@ class App extends \Modularity\Module
         $data['moduleId'] = $this->ID;
         $data['feed'] = array();
         $data['display'] = get_field('mod_rss_display', $this->ID);
-        $data['hidden'] = get_post_meta($this->ID, 'mod_rss_hidden_inlays', true);
 
         if (is_array($feeds) && !empty($feeds)) {
             foreach ($feeds as $feed) {
@@ -73,21 +72,6 @@ class App extends \Modularity\Module
                         //Append label
                         $current['encloushure']['title'] = $feed['mod_rss_label'] ? $feed['mod_rss_label'] : $rss->get_title();
 
-                        //Append class
-                        if (in_array($current['id'], $data['hidden'])) {
-                            $current['visibilityClass'] = "is-hidden";
-                        } else {
-                            $current['visibilityClass'] = "";
-                        }
-
-                        //Append full item, if not hidden and !logged in
-                        if (is_user_logged_in() && current_user_can('edit_posts')) {
-                            $data['feed'][] = $current;
-                        } else {
-                            if (!in_array($current['id'], $data['hidden'])) {
-                                $data['feed'][] = $current;
-                            }
-                        }
                     }
                 }
             }
@@ -95,6 +79,12 @@ class App extends \Modularity\Module
 
         //Sort
         $data['feed'] = $this->sortByTimestamp($data['feed']);
+
+        //Append visibility class
+        $data['feed'] = $this->appendVisibility($data['feed'], get_post_meta($this->ID, 'mod_rss_hidden_inlays', true));
+
+        //Remove hidden inlays
+        $data['feed'] = $this->removeHidden($data['feed'], get_post_meta($this->ID, 'mod_rss_hidden_inlays', true));
 
         //Truncate
         $data['feed'] = $this->truncateFeed($data['feed']);
@@ -209,6 +199,82 @@ class App extends \Modularity\Module
     public function readableTimeStamp($unixtime) : string
     {
         return human_time_diff($unixtime, current_time('timestamp'));
+    }
+
+    /**
+     * Append visibility class
+     * @param array $feed array items with the feed data
+     * @param array $hidden array with hidden id's
+     * @param string $key name of compare item
+     * @return array $feed sanitized output array
+     */
+
+    public function appendVisibility($feed, $hidden, $key = 'id')
+    {
+        if (is_array($feed) && !empty($feed)) {
+            foreach ($feed as $item) {
+                if (in_array($item[$key], $hidden)) {
+                    $current['visibilityClass'] = "is-hidden";
+                } else {
+                    $current['visibilityClass'] = "";
+                }
+            }
+
+        }
+        return $feed;
+    }
+    /**
+     * Append visibility class
+     * @param array $feed array items with the feed data
+     * @param array $hidden array with hidden id's
+     * @param string $key name of compare item
+     * @return array $feed sanitized output array
+     */
+
+    public function removeHidden($feed, $hidden, $key = 'id')
+    {
+
+        //Bypass if is admin
+        if (is_user_logged_in() && current_user_can('edit_posts')) {
+            return $feed;
+        }
+
+        $sanitized= array();
+
+        if (is_array($feed) && !empty($feed)) {
+            foreach ($feed as $item) {
+                if (in_array($item[$key], $hidden)) {
+                    continue;
+                }
+                $sanitized[$item[$key]] = $item;
+            }
+            return $sanitized;
+        }
+
+        return $feed;
+    }
+
+    /**
+     * Append visibility class
+     * @param array $feed array items with the feed data
+     * @param array $hidden array with hidden id's
+     * @param string $key name of compare item
+     * @return array $feed sanitized output array
+     */
+
+    public function appendVisibility($feed, $hidden, $key = 'id')
+    {
+        if (is_array($feed) && !empty($feed)) {
+            foreach ($feed as $item) {
+                if (in_array($item[$key], $hidden)) {
+                    $current['visibilityClass'] = "is-hidden";
+                } else {
+                    $current['visibilityClass'] = "";
+                }
+            }
+
+        }
+        return $feed;
     }
 
     /**
