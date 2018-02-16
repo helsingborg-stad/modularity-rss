@@ -21,33 +21,37 @@
         </style>
 
         <!-- List -->
-        <ul id="{{ $sectionID }}" class="rss-feed rss-feed-v2">
+        <ul id="{{ $sectionID }}" class="c-posts c-posts--rss rss-feed rss-feed-v2">
             @foreach($feed as $item)
-                <li>
-                    <a href="{{ $item['link'] }}" class="box box-news box-news-horizontal">
+                <li class="c-posts__item">
+                    <a href="{{ $item['link'] }}" class="c-feed c-feed--rss u-no-decoration u-inherit-color u-content-spacing">
 
-                        <div class="box-content">
-                            <h3 class="box-title text-highlight">
+                        <div class="c-feed__header">
+                            <h3 class="c-feed__title u-display-inline">
                                 {{ $item['title'] }}
-
-                                @if($showVisibilityButton)
-                                    <button class="js-mod-rss-toggle-visibility {{ $item['visibilityClass'] }}" data-module-id="{{ $moduleId }}" data-inlay-id="{{ $item['id'] }}"><i class="pricon pricon-eye"></i><i class="pricon pricon-eye-hide"></i></button>
-                                @endif
                             </h3>
+                            <span class="u-text-small u-nowrap u-display-none u-display-inline@md">({{ $item['time_readable'] }} {{ $translations['ago'] }})</span>
 
-                            @if(in_array('date', $display))
-                            <time datetime="{{ $item['time_markup'] }}">{{ $item['time_markup'] }} ({{ $item['time_readable'] }} {{ $translations['ago'] }})</time>
+                            @if($showVisibilityButton)
+                                <button class="o-visibility-toggle c-feed__visibility-toggler js-mod-rss-toggle-visibility {{ $item['visibilityClass'] }}" data-module-id="{{ $moduleId }}" data-inlay-id="{{ $item['id'] }}"><i class="pricon pricon-eye"></i><i class="pricon pricon-eye-hide"></i></button>
                             @endif
 
-                            @if(in_array('label', $display))
-                            <span class="source strong">
+                            <div class="c-feed__meta u-text-small">
                                 @if(in_array('date', $display))
-                                    -
+                                    <b class="c-feed__date">
+                                        <time datetime="{{ $item['time_markup'] }}">{{ $item['time_markup'] }} </time>
+                                    </b>
                                 @endif
-                                {{ $item['encloushure']['title'] }}
-                            </span>
-                            @endif
 
+                                @if(in_array('label', $display))
+                                    <b class="c-feed__source">
+                                        {{ $item['encloushure']['title'] }}
+                                    </b>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="c-feed__body">
                             @if(in_array('excerpt', $display))
                                 <p>{{ $item['excerpt'] }}</p>
                             @endif
@@ -55,12 +59,14 @@
                             @if(in_array('content', $display))
                                 <p>{{ $item['content'] }}</p>
                             @endif
-
-                            @if(in_array('readmore', $display))
-                            <p><span class="link-item">{{ $translations['readmore'] }}</span></p>
-                            @endif
-
                         </div>
+
+                        <div class="c-feed__footer">
+                            @if(in_array('readmore', $display))
+                            <span class="c-feed__action btn btn--flat">{{ $translations['readmore'] }}</span>
+                            @endif
+                        </div>
+
                     </a>
                 </li>
             @endforeach
