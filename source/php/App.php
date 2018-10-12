@@ -19,6 +19,11 @@ class App extends \Modularity\Module
         $this->ttl = 3600;
 
         $this->curl = new \Modularity\Helper\Curl(true, 60);
+
+        //Set the feed timeout
+        add_action('wp_feed_options', function (&$feed, $url) {
+                $feed->set_timeout(2); // set to 2 seconds
+        }, 10, 2);
     }
 
     /**
